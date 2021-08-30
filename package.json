@@ -1,18 +1,21 @@
 {
-  "name": "electron-quick-start",
+  "name": "snoopy-emoji",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "Keyboard app that runs in the background and helps you with emojis and efficient copy-paste helps improve the workflow and productivity",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/smart-tools/snoopy-keyboard",
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "emoji",
+    "keyboard",
+    "smart",
+    "copy-paste",
+    "shortcuts",
+    "snoopy",
+    "form-filler",
+    "fast-type"
   ],
   "author": "GitHub",
   "license": "CC0-1.0",
