@@ -4,17 +4,26 @@ const path = require("path");
 
 let window;
 
-function createWindow() {
+const createWindow = () => {
   // Create the browser window.
   window = new BrowserWindow({
     width: 600,
     height: 400,
-    autoHideMenuBar: true,
+    autoHideMenuBar: false,
   });
-  window.setMenuBarVisibility(false);
-  // and load the index.html of the app.
-  window.loadFile("client/index.html");
+  window.setMenuBarVisibility(true);
+  // window.setVisibleOnAllWorkspaces(true);
 
+  // Load React App
+  window.loadURL("index.html");
+
+  // // If 'esc' is pressed, hide the app window
+  // window.webContents.on("before-input-event", (event, input) => {
+  //   if (input.key === "Escape") {
+  //     hideWindow();
+  //     // event.preventDefault()
+  //   }
+  // });
   // This is a global shortcut to activate Geniemoji with hotkey(s)
   globalShortcut.register("Control+q", () => {
     if (window.isVisible()) {
@@ -22,6 +31,11 @@ function createWindow() {
     } else {
       showWindow();
     }
+  });
+
+  // Hide the window when it loses focus
+  window.on("blur", () => {
+    hideWindow();
   });
 
   if (process.platform == "darwin") {
@@ -33,7 +47,7 @@ function createWindow() {
   }
   // Open the DevTools.
   // window.webContents.openDevTools()
-}
+};
 
 const hideWindow = () => {
   // This is required because app.hide() is not defined in windows and linux
@@ -57,20 +71,15 @@ const hideWindow = () => {
 app.whenReady().then(() => {
   createWindow();
 
-  app.on("activate", function () {
+  app.on("activate", () => {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
-
-  // Hide the window when it loses focus
-  window.on("blur", () => {
-    hideWindow();
-  });
 });
 
 // Hide the menu and dev tools
-Menu.setApplicationMenu(null);
+// Menu.setApplicationMenu(null);
 
 app.on("ready", () => {
   createTray();
@@ -80,7 +89,7 @@ app.on("ready", () => {
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
-app.on("window-all-closed", function () {
+app.on("window-all-closed", () => {
   if (process.platform !== "darwin") app.quit();
 });
 
@@ -92,7 +101,7 @@ const createTray = () => {
     window.destroy();
   });
   tray.on("double-click", toggleWindow);
-  tray.on("click", function (event) {
+  tray.on("click", (event) => {
     toggleWindow();
   });
 };
