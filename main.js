@@ -15,7 +15,7 @@ const createWindow = () => {
   // window.setVisibleOnAllWorkspaces(true);
 
   // Load React App
-  window.loadURL("index.html");
+  window. ("index.html");
 
   // // If 'esc' is pressed, hide the app window
   // window.webContents.on("before-input-event", (event, input) => {
